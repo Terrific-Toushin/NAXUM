@@ -59,17 +59,14 @@ $rank_id = db_select_rank($sql);
 
 $sql = "SELECT COUNT(*) total FROM (select count(purchaser_id) from order_details WHERE distributor_id != '' GROUP BY purchaser_id) as total";
 $total_records  = db_select_one($sql);
-//var_dump($resultCount);
-//die();
+
 $total_records = (int)$total_records;
 $total_no_of_pages = ceil($total_records / $total_records_per_page);
 $second_last = $total_no_of_pages - 1; // total pages minus 1
 $sql = "select distributor_id, CONCAT(users.first_name,' ',users.last_name) as distributor, SUM(qantity) as total_sales from order_details LEFT JOIN users on order_details.distributor_id = users.id WHERE distributor_id != '' GROUP BY purchaser_id ORDER BY total_sales DESC LIMIT ".$total_records_per_page." OFFSET ".$offset." ";
-//echo $offset;
-//die();
+
 $result = db_select_all($sql);
-//print_r($result);
-//die();
+
 ?>
 <div class="">
     <div class="row">

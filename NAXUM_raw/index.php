@@ -87,13 +87,22 @@ $result = db_select_all($sql);
 
                 <tbody>
                 <?php
-                    $zero = 0;
+                    
                     foreach ($result as $results){
-                        echo "<tr>
-                         <td>".isset($rank_id[$results->total_sales]) ? $rank_id[$results->total_sales] : $zero."</td>
+                        if(isset($rank_id[$results->total_sales])){
+                            echo "<tr>
+                         <td>".$rank_id[$results->total_sales]."</td>
                          <td>".$results->distributor."</td>
                          <td>$".$results->total_sales."</td>
                          </tr>";
+                        }else{
+                            echo "<tr>
+                         <td>0</td>
+                         <td>".$results->distributor."</td>
+                         <td>$".$results->total_sales."</td>
+                         </tr>";
+                        }
+                        
                     }
                 ?>
                 </tbody>
